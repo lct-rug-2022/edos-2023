@@ -1,0 +1,19 @@
+{
+  "hate_speech": {
+    "edos_A": "edos_binary",
+    "hate_binary": "hate_binary",
+    "hate_target_groups": "hate_target_groups",
+    "hate_target": "hate_target",
+    "offense_binary": "offense_binary",
+    "sexism_binary": "sexism_binary",
+    "toxicity_binary": "toxicity_binary"
+  },
+  "misogyny": {
+    "edos_B": "taskB_edos",
+    "edos_C": "taskC_edos",
+    "evalita": "taskB_evalita2018",
+    "exist": "taskB_exist",
+    "online": "taskB_online_misogyny",
+    "sexist": "taskB_call_me_sexist"
+  }
+}
