@@ -76,29 +76,6 @@ We used [neptune.ai](https://neptune.ai/) for experiment tracking. In order to u
 and set up the API token and a project name, where the experiment results will be stored.
 
 
-### Baseline
-
-To train baseline models or finetune pretrained models on the task data, run the following script:
-```shell
-python training/finetuning/train.py --base-model="roberta-base" --edos-task=A --config-name="updated"
-```
-where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
-
-
-Use `python training/finetuning/train.py --help` or check the file to see other customizable parameters.
-
-
-### Preprocessing experiments
-
-To run preprocessing experiments, run the following script:
-```shell
-sbatch training/preprocessing_test/train.py --base-model="roberta-base" --task=offense --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
-```
-where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `task` is the task data to train on (offense, sexism, hate, edos). The flags `--preprocess-masks`, `--preprocess-hashtags`, `--preprocess-emoji`, `--preprocess-spaces` control the preprocessing steps.
-
-Use `python training/preprocessing_test/train.py --help` or check the file to see other customizable parameters.
-
-
 ### Further pre-training
 
 To run TAPT on EDOS, DAPT on 2M, and DAPT on 2M+HS accordingly:
@@ -110,15 +87,26 @@ python training/dont_stop_pretraining/train.py --task-name=2M_hate --batch-size=
 
 Use `python training/dont_stop_pretraining/train.py --help` or check the file to see other customizable parameters.
 
+
 ### Fine-tuning
 
-To finetune any local or Huggingface Hub available pretrained models on EDOS task A, B, or C:
-```shell
-python training/finetuning/train.py --base-model="roberta-large" --edos-task=A --config-name="updated-large"
-```
-where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
+`training/finetuning/train.py` is a universal script for fine-tuning any local or HF Hub model on EDOS data.
+
+Main parameters:
+* `--base-model` is the name of the pre-trained model (local or from HF Hub);
+* `--edos-task` is the task to train on (A, B, C);
+* `--config-name` is the key to the parameter configuration in `training/finetuning/edos_eval_params.json`
+    * `default` was used to train initial baselines and compare between different available pre-trained models of `base`-size;
+    * `updated-large` was used for fine-tuning of DAPT and TAPT `large`-sized models.
 
 Use `python training/finetuning/train.py --help` or check the file to see other customizable parameters.
+
+Example of fine-tuning a DAPT model:
+```shell
+BASE_MODEL=models/dont_stop_pretraining-roberta-large-2M-basic_preproc
+python training/finetuning/train.py --base-model=$BASE_MODEL --edos-task=A --config-name="updated-large"
+```
+
 
 ### Multi-task learning
 
@@ -149,11 +137,23 @@ The list of the datasets is available in `training/machamp/datasets.json`. The d
 `training/machamp/train.py` also contains other customizable parameters.
 
 
+### Preprocessing experiments
+
+Example of a preprocessing experiment:
+```shell
+sbatch training/preprocessing_test/train.py --base-model="roberta-base" --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
+```
+
+Main parameters:
+* `--base-model` is the name of the pre-trained model (local or from HF Hub);
+* The flags `--preprocess-masks`, `--preprocess-hashtags`, `--preprocess-emoji`, `--preprocess-spaces` control the preprocessing steps.
+
+Use `python training/preprocessing_test/train.py --help` or check the file to see other customizable parameters.
+
+
 ## Results
 
-The results and analysis will be available soon (after paper review).
-
-`TBA paper link`
+The results and analysis will be available later.
 
 
 ## Acknowledgements

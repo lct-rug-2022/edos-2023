@@ -10,7 +10,7 @@ import evaluate
 import typer
 import torch
 
-from preprocessing import preprocess
+from data_preprocessing.preprocessing import preprocess
 
 
 ROOT_FOLDER = Path(__file__).parent.parent.parent  # repo root folder
@@ -33,7 +33,7 @@ app = typer.Typer(add_completion=False)
 @app.command()
 def main(
         base_model: str = typer.Option('roberta-base', help='ModelHub pretrained model to finetune'),
-        task: str = typer.Option('sexism', help='Task/dataset to train edos/hate/sexism/toxicity/offense'),
+        task: str = typer.Option('edos', help='Task/dataset to train edos/hate/sexism/toxicity/offense'),
         preprocess_masks: bool = typer.Option(True, help='Do masks preprocessing'),
         preprocess_hashtags: bool = typer.Option(True, help='Do hashtags preprocessing'),
         preprocess_emoji: bool = typer.Option(True, help='Do emoji preprocessing'),
