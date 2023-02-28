@@ -137,7 +137,7 @@ def predict_to_file(
 def main(
         base_model: str = typer.Option('roberta-base', help='Pretrained model to finetune: HUB or Path'),
         edos_task: str = typer.Option('A', help='EDOS to train'),
-        config_name: str = typer.Option('large', help='Config name to use: default, updated, large'),
+        config_name: str = typer.Option('default', help='Config name to use: default, updated-large'),
         results_folder: Path = typer.Option(ROOT_FOLDER / 'results', dir_okay=True, writable=True, help='Folder to save results'),
         save_folder: Path = typer.Option(ROOT_FOLDER / 'models' / 'dont_stop_pretraining_eval', dir_okay=True, writable=True, help='Folder to save trained model'),
 ):
