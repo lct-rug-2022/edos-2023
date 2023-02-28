@@ -3,6 +3,9 @@ gdrive.json
 .env
 *.out
 results/
+models/
+edos_data/
+multitask_data/
 .neptune/
 
 
@@ -140,7 +143,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
-# dvc
-noswearing.txt
-multitask_data/machamp
