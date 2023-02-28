@@ -27,7 +27,7 @@ pip install -U -r requirements.txt
 
 ## Data
 
-The data is not included in the repository because of license and access restrictions for some datasets. 
+The data is not included in the repository because of access restrictions for some datasets. 
 In order to reproduce our results, you should collect the data and place it according to the following structure:
 
 ```
@@ -63,7 +63,7 @@ multitask_data
             └───AMI2020
 ```
 
-Afterwards you need to run the following notebooks and scripts under `data_preprocessing/` folder to preprocess the data:
+Afterwards you need to run the following notebooks and scripts in the `data_preprocessing/` folder to preprocess the data:
 * `edos_dataset_split.ipynb` - to split the task data into _train_ and _eval_ sets and write the processed files to `edos_data/processed`.
 * `process_datasets.ipynb` - to process all HS datasets (written to `multitask_data/formatted`) and reorganize them into tasks for multi-task learning (written to `multitask_data/processed`).
 * `preprocessing.py` - to preprocess all data (masking, emoji normalisation, space normalisation). Preprocessed text is written to `text_preprocessed` column of each csv file.
