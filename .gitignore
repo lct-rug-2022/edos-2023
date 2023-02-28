@@ -1,3 +1,11 @@
+# server
+gdrive.json
+.env
+*.out
+results/
+.neptune/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -5,6 +13,10 @@ __pycache__/
 
 # C extensions
 *.so
+
+# MacOS
+.DS_Store
+.idea
 
 # Distribution / packaging
 .Python
@@ -127,3 +139,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# dvc
+noswearing.txt
+multitask_data/machamp
