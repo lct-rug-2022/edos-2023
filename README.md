@@ -16,7 +16,7 @@ Full task description is available via [CodaLab](https://codalab.lisn.upsaclay.f
 
 ## Requirements
 
-Python >= 3.7 is required. During training version 3.7 was used.
+Python >= 3.9 is required. During training version 3.9 was used.
 
 We recommend to use a virtual environment:
 ```shell
