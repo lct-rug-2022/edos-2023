@@ -85,13 +85,18 @@ python training/finetuning/train.py --base-model="roberta-base" --edos-task=A --
 where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
 
 
+Use `python training/finetuning/train.py --help` or check the file to see other customizable parameters.
+
+
 ### Preprocessing experiments
 
 To run preprocessing experiments, run the following script:
 ```shell
-sbatch training/preprocessing_test/run_training.sh --base-model="roberta-base" --task=offense --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
+sbatch training/preprocessing_test/train.py --base-model="roberta-base" --task=offense --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
 ```
 where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `task` is the task data to train on (offense, sexism, hate, edos). The flags `--preprocess-masks`, `--preprocess-hashtags`, `--preprocess-emoji`, `--preprocess-spaces` control the preprocessing steps.
+
+Use `python training/preprocessing_test/train.py --help` or check the file to see other customizable parameters.
 
 
 ### Further pre-training
@@ -103,15 +108,17 @@ python training/dont_stop_pretraining/train.py --task-name=2M --batch-size=24 --
 python training/dont_stop_pretraining/train.py --task-name=2M_hate --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
 ```
 
-`training/dont_stop_pretraining/train.py` also contains other customizable parameters.
+Use `python training/dont_stop_pretraining/train.py --help` or check the file to see other customizable parameters.
 
 ### Fine-tuning
 
-To finetune local or Huggingface Hub available pretrained models on EDOS task A, B, or C:
+To finetune any local or Huggingface Hub available pretrained models on EDOS task A, B, or C:
 ```shell
 python training/finetuning/train.py --base-model="roberta-large" --edos-task=A --config-name="updated-large"
 ```
 where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
+
+Use `python training/finetuning/train.py --help` or check the file to see other customizable parameters.
 
 ### Multi-task learning
 
@@ -139,11 +146,18 @@ The list of the datasets is available in `training/machamp/datasets.json`. The d
 * Task B: `edos_C,evalita` + fine-tuning, `exist,edos_C,evalita`;
 * Task C: `edos_B,sexist` + fine-tuning, `edos_B,sexist`.
 
-`python training/machamp/train.py` also contains other customizable parameters.
+`training/machamp/train.py` also contains other customizable parameters.
+
+
+## Results
+
+The results and analysis will be available soon (after paper review).
+
+`TBA paper link`
 
 
 ## Acknowledgements
 
 * We would like to thank Tommaso Caselli for the insightful supervision and multiple wonderful ideas.
-* We thank the Center for Information Technology of the University of Groningen for their support and for providing access to the Peregrine high-performance computing cluster.
+* We would like to thank the Center for Information Technology of the University of Groningen for their support and for providing access to the Peregrine high-performance computing cluster.
 * The first four authors are supported by the Erasmus Mundus Master Programme ["Language and Communication Technologies"](https://lct-master.org).
