@@ -16,7 +16,7 @@ Full task description is available via [CodaLab](https://codalab.lisn.upsaclay.f
 
 ## Requirements
 
-Python >= 3.7
+Python >= 3.7 is required. During training version 3.7 was used.
 
 We recommend to use a virtual environment:
 ```shell
@@ -78,12 +78,21 @@ and set up the API token and a project name, where the experiment results will b
 
 ### Further pre-training
 
+`training/dont_stop_pretraining/train.py` is the main script for further pre-training of a model using MLM task.
+
 To run TAPT on EDOS, DAPT on 2M, and DAPT on 2M+HS accordingly:
 ```shell
-python training/dont_stop_pretraining/train.py --task-name=edos --batch-size=32 --max-epochs=10 --eval-steps=298
-python training/dont_stop_pretraining/train.py --task-name=2M --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
-python training/dont_stop_pretraining/train.py --task-name=2M_hate --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=edos --batch-size=32 --max-epochs=10 --eval-steps=298
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M_hate --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
 ```
+
+Main parameters:
+* `--base-model` is the name of the pre-trained model (local or from HF Hub);
+* `--task-name` is the dataset collection to pre-train on (`edos`, `2M`, `2M_hate` - stands for edos data only, 2M data provided by task organizers and 2M data + HS data described in the paper);
+* `--preprocessing-mode` is the parameter to choose the preprocessing mode for the data:
+    * `basic` - masking and space normalisation;
+    * `full` - masking, emoji normalisation and space normalisation;
 
 Use `python training/dont_stop_pretraining/train.py --help` or check the file to see other customizable parameters.
 
