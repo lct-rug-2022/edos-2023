@@ -160,4 +160,4 @@ The results and analysis will be available later.
 
 * We would like to thank Tommaso Caselli for the insightful supervision and multiple wonderful ideas.
 * We would like to thank the Center for Information Technology of the University of Groningen for their support and for providing access to the Peregrine high-performance computing cluster.
-* The first four authors are supported by the Erasmus Mundus Master Programme ["Language and Communication Technologies"](https://lct-master.org).
+* The first four authors are supported by the Erasmus Mundus Master's Programme ["Language and Communication Technologies"](https://lct-master.org).
