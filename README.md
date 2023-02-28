@@ -78,12 +78,17 @@ and set up the API token and a project name, where the experiment results will b
 ### Baseline
 
 TODO: review
+
 To train baseline models or finetune pretrained models on the task data, run the following script:
 ```shell
 python training/finetuning --base-model="roberta-base" --edos-task=A --config-name="updated"
 ```
 where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
 
+
+### Preprocessing experiments
+
+TODO
 
 ### Further pre-training
 
@@ -127,3 +132,10 @@ The list of the datasets is available in `training/machamp/datasets.json`. The d
 * Task C: `edos_B,sexist` + fine-tuning, `edos_B,sexist`.
 
 `python training/machamp/train.py` also contains other customizable parameters.
+
+
+## Acknowledgements
+
+* We would like to thank Tommaso Caselli for the insightful supervision and multiple wonderful ideas.
+* We thank the Center for Information Technology of the University of Groningen for their support and for providing access to the Peregrine high-performance computing cluster.
+* The first four authors are supported by the Erasmus Mundus Master Programme ["Language and Communication Technologies"](https://lct-master.org).
