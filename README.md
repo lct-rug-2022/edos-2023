@@ -1,6 +1,6 @@
 # LCT-1 at SemEval-2023 Task 10: Pre-training and Multi-task Learning for Sexism Detection and Classification
 
-This is repository of the LCT-1 team submission at SemEval-2023 Task 10 (). <br>
+This is repository of the LCT-1 team submission at SemEval-2023 Task 10 (EDOS 2023). <br>
 Authors: Konstantin Chernyshev, Ekaterina Garanina, Duygu Bayram, Qiankun Zheng, Lukas Edman (University of Groningen, the Netherlands).
 
 ## Task description
@@ -11,7 +11,7 @@ The task is to detect and classify sexist posts in English text from Redding and
 * TASK B - **Category of Sexism**: for posts which are sexist, a four-class classification where systems have to predict one of four categories: (1) threats, (2)  derogation, (3) animosity, (4) prejudiced discussions. 
 * TASK C - **Fine-grained Vector of Sexism**: for posts which are sexist, an 11-class classification where systems have to predict one of 11 fine-grained vectors.
 
-Full task info available via [CodaLab](https://codalab.lisn.upsaclay.fr/competitions/7124).
+Full task description is available via [CodaLab](https://codalab.lisn.upsaclay.fr/competitions/7124).
 
 
 ## Requirements
@@ -27,7 +27,7 @@ pip install -U -r requirements.txt
 
 ## Data
 
-The data is not included in the repository because of access restrictions for some of the datasets. 
+The data is not included in the repository because of license and access restrictions for some datasets. 
 In order to reproduce our results, you should collect the data and place it according to the following structure:
 
 ```
@@ -63,32 +63,36 @@ multitask_data
             └───AMI2020
 ```
 
-Afterwards you need to run the following notebooks and scripts to preprocess the data:
-* `data_preprocessing/edos_dataset_split.ipynb` - to split the task data into _train_ and _eval_ sets and write the processed files to `edos_data/processed`.
-* `data_preprocessing/process_datasets.ipynb` - to process all HS datasets (written to `multitask_data/formatted`) and reorganize them into tasks for multi-task learning (written to `multitask_data/processed`).
-* `data_preprocessing/preprocessing.ipynb` - to preprocess all data (masking, emoji normalisation, space normalisation). Preprocessed text is written to `text_preprocessed` column of each csv file.
-* `data_preprocessing/machamp_preprocess.py` - to prepare the MTL data for MaChAmp (written to `multitask_data/machamp`).
+Afterwards you need to run the following notebooks and scripts under `data_preprocessing/` folder to preprocess the data:
+* `edos_dataset_split.ipynb` - to split the task data into _train_ and _eval_ sets and write the processed files to `edos_data/processed`.
+* `process_datasets.ipynb` - to process all HS datasets (written to `multitask_data/formatted`) and reorganize them into tasks for multi-task learning (written to `multitask_data/processed`).
+* `preprocessing.py` - to preprocess all data (masking, emoji normalisation, space normalisation). Preprocessed text is written to `text_preprocessed` column of each csv file.
+* `machamp_preprocess.py` - to prepare the MTL data for MaChAmp (written to `multitask_data/machamp`).
 
 
 ## Experiments
 
-We use [neptune.ai](https://neptune.ai/) for experiment tracking. In order to use it, you need to create an account 
+We used [neptune.ai](https://neptune.ai/) for experiment tracking. In order to use it, you need to create an account 
 and set up the API token and a project name, where the experiment results will be stored.
+
 
 ### Baseline
 
-TODO: review
-
 To train baseline models or finetune pretrained models on the task data, run the following script:
 ```shell
-python training/finetuning --base-model="roberta-base" --edos-task=A --config-name="updated"
+python training/finetuning/train.py --base-model="roberta-base" --edos-task=A --config-name="updated"
 ```
 where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
 
 
 ### Preprocessing experiments
 
-TODO
+To run preprocessing experiments, run the following script:
+```shell
+sbatch training/preprocessing_test/run_training.sh --base-model="roberta-base" --task=offense --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
+```
+where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `task` is the task data to train on (offense, sexism, hate, edos). The flags `--preprocess-masks`, `--preprocess-hashtags`, `--preprocess-emoji`, `--preprocess-spaces` control the preprocessing steps.
+
 
 ### Further pre-training
 
@@ -103,7 +107,11 @@ python training/dont_stop_pretraining/train.py --task-name=2M_hate --batch-size=
 
 ### Fine-tuning
 
-TODO
+To finetune local or Huggingface Hub available pretrained models on EDOS task A, B, or C:
+```shell
+python training/finetuning/train.py --base-model="roberta-large" --edos-task=A --config-name="updated-large"
+```
+where `base-model` is the name of the pretrained model (local or using Hugginface Hub), `edos-task` is the task to train on (A, B, C), and `config-name` is the name of the config in `training/finetuning/edos_eval_params.json`.
 
 ### Multi-task learning
 

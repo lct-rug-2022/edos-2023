@@ -1,0 +1,104 @@
+{
+    "A": {
+        "default": {
+            "batch_size": 32,
+            "max_epochs": 10,
+            "eval_steps": 100,
+            "learning_rate": 1e-5,
+            "warmup_steps": 5,
+            "fp16_full_eval": true
+        },
+        "updated": {
+            "batch_size": 32,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 2e-5,
+            "warmup_ratio": 0.1,
+            "fp16_full_eval": false
+        },
+        "large": {
+            "batch_size": 32,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 1e-5,
+            "warmup_ratio": 0.1,
+            "fp16_full_eval": false
+        },
+        "large-updated": {
+            "batch_size": 32,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 5e-6,
+            "warmup_ratio": 0.1,
+            "fp16_full_eval": false
+        }
+    },
+    "B": {
+        "default": {
+            "batch_size": 16,
+            "max_epochs": 10,
+            "eval_steps": 100,
+            "learning_rate": 1e-5,
+            "warmup_steps": 5,
+            "fp16_full_eval": true
+        },
+        "updated": {
+            "batch_size": 16,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 2e-5,
+            "warmup_ratio": 0.05,
+            "fp16_full_eval": false
+        },
+        "large": {
+            "batch_size": 16,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 1e-5,
+            "warmup_ratio": 0.05,
+            "fp16_full_eval": false
+        },
+        "large-updated": {
+            "batch_size": 16,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 5e-6,
+            "warmup_ratio": 0.05,
+            "fp16_full_eval": false
+        }
+    },
+    "C": {
+        "default": {
+            "batch_size": 16,
+            "max_epochs": 10,
+            "eval_steps": 100,
+            "learning_rate": 1e-5,
+            "warmup_steps": 5,
+            "fp16_full_eval": true
+        },
+        "updated": {
+            "batch_size": 16,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 2e-5,
+            "warmup_ratio": 0.05,
+            "fp16_full_eval": false
+        },
+        "large": {
+            "batch_size": 16,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 1e-5,
+            "warmup_ratio": 0.05,
+            "fp16_full_eval": false
+        },
+        "large-updated": {
+            "batch_size": 16,
+            "max_epochs": 16,
+            "eval_steps": 200,
+            "learning_rate": 5e-6,
+            "warmup_ratio": 0.05,
+            "fp16_full_eval": false
+        }
+    }
+}
