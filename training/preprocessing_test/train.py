@@ -1,5 +1,6 @@
 from pathlib import Path
 import random
+import sys
 
 from transformers import AutoConfig, AutoTokenizer, EarlyStoppingCallback, AutoModelForSequenceClassification, TrainingArguments, Trainer, DataCollatorWithPadding
 from datasets import Dataset, DatasetDict, ClassLabel, Value, load_dataset
@@ -10,10 +11,12 @@ import evaluate
 import typer
 import torch
 
+ROOT_FOLDER = Path(__file__).parent.parent.parent  # repo root folder
+sys.path.append(str(ROOT_FOLDER))
+
 from data_preprocessing.preprocessing import preprocess
 
 
-ROOT_FOLDER = Path(__file__).parent.parent.parent  # repo root folder
 DATA_FOLDER = ROOT_FOLDER / 'multitask_data' / 'processed' / 'hate_speech'
 
 IS_CUDA_AVAILABLE = torch.cuda.is_available()

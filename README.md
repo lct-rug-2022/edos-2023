@@ -33,34 +33,28 @@ In order to reproduce our results, you should collect the data and place it acco
 ```
 edos_data
 └───raw
-    │   train_all_tasks.csv
-    │   dev_task_a_entries.csv
-    │   dev_task_b_entries.csv
-    │   dev_task_c_entries.csv
-    │   test_task_a_entries.csv
-    │   test_task_b_entries.csv
-    │   test_task_c_entries.csv
-    │   reddit_1M_unlabelled.csv
+    │   edos_labelled_aggregated.csv
     │   gab_1M_unlabelled.csv
+    │   reddit_1M_unlabelled.csv
 
 multitask_data
 └───raw
     │
     └───hate_speech
-    │   └───OLIDv1.0
     │   └───HaSpeeDe_2018
     │   └───HaSpeeDe_2020
-    │   └───Jigsaw_unintended_bias_civil_comments
     │   └───hateval2019
+    │   └───Jigsaw_unintended_bias_civil_comments
     │   └───measuring_hate_speech
+    │   └───OLIDv1.0
     │
     └───misogyny
-        └───Guest_et_al_online_misogyny
-        └───call_me_sexist
-        └───EXIST2021
         └───AMI_EVALITA
             └───AMI2018_ELG
             └───AMI2020
+        └───call_me_sexist
+        └───EXIST2021
+        └───Guest_et_al_online_misogyny
 ```
 
 Afterwards you need to run the following notebooks and scripts in the `data_preprocessing/` folder to preprocess the data:
@@ -82,7 +76,7 @@ and set up the API token and a project name, where the experiment results will b
 
 To run TAPT on EDOS, DAPT on 2M, and DAPT on 2M+HS accordingly:
 ```shell
-python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=edos --batch-size=32 --max-epochs=10 --eval-steps=298
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=edos --batch-size=32 --max-epochs=10 --eval-steps=298 --preprocessing-mode=basic
 python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
 python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M_hate --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
 ```
@@ -112,14 +106,14 @@ Use `python training/finetuning/train.py --help` or check the file to see other 
 
 Example of fine-tuning a DAPT model:
 ```shell
-BASE_MODEL=models/dont_stop_pretraining-roberta-large-2M-basic_preproc
+BASE_MODEL=models/dont_stop_pretraining/dont_stop_pretraining-roberta-large-2M-basic_preproc
 python training/finetuning/train.py --base-model=$BASE_MODEL --edos-task=A --config-name="updated-large"
 ```
 
 
 ### Multi-task learning
 
-We have customized [MaChAmp](https://github.com/machamp-nlp/machamp) code to include integration with Neptune to keep track of experiments. 
+We have customized [MaChAmp](https://github.com/machamp-nlp/machamp) code (version: commit 086dcbc) to include integration with Neptune to keep track of experiments. 
 The customized code is located in `machamp_repo` folder.
 
 Example of one MTL experiment:
@@ -150,7 +144,7 @@ The list of the datasets is available in `training/machamp/datasets.json`. The d
 
 Example of a preprocessing experiment:
 ```shell
-sbatch training/preprocessing_test/train.py --base-model="roberta-base" --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
+python training/preprocessing_test/train.py --base-model="roberta-base" --preprocess-masks --preprocess-hashtags --preprocess-emoji --preprocess-spaces
 ```
 
 Main parameters:
