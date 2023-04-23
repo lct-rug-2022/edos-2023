@@ -76,9 +76,9 @@ and set up the API token and a project name, where the experiment results will b
 
 To run TAPT on EDOS, DAPT on 2M, and DAPT on 2M+HS accordingly:
 ```shell
-python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=edos --batch-size=32 --max-epochs=10 --eval-steps=298 --preprocessing-mode=basic
-python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
-python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M_hate --batch-size=24 --max-epochs=5 --eval-steps=10000 --preprocessing-mode=basic
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=edos --batch-size=32 --max-epochs=10 --eval-steps=298 --learning-rate=5e-6 --preprocessing-mode=basic
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M --batch-size=24 --max-epochs=5 --eval-steps=10000 --learning-rate=5e-6 --preprocessing-mode=basic
+python training/dont_stop_pretraining/train.py --base-model="roberta-large" --task-name=2M_hate --batch-size=24 --max-epochs=5 --eval-steps=10000 --learning-rate=5e-6 --preprocessing-mode=basic
 ```
 
 Main parameters:
